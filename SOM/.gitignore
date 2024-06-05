@@ -1,6 +1,0 @@
-*.pyc
-.trash
-*.swp
-test/.ipynb_checkpoints/
-test/testset.ipynb
-test/test.py
