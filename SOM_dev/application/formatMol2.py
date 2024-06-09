@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import sys
-import numpy
+import numpy as np
 
 frFileName = sys.argv[1]
 
@@ -19,7 +19,8 @@ atomType = []
 resTypes = []
 resIds = []
 coordMat = []
-print 'Reading parameters...'
+#update to the print function
+print ('Reading parameters...')
 for line in fr:
  if recordName:
   name=line.strip()
@@ -47,25 +48,27 @@ for line in fr:
   record=True
 fr.close()
 fw.close()
-
-print 'Array conversion...'
-ligNames = numpy.array(ligNames)
-ligCharges = numpy.array(ligCharges, dtype=float)
-ligAtomIds = numpy.array(ligAtomIds, dtype=int)
-resTypes = numpy.array(resTypes)
-atomName = numpy.array(atomName)
-resIds = numpy.array(resIds, dtype=int)
-coordMat = numpy.array(coordMat, dtype=float)
-atomType = numpy.array(atomType)
-print 'Array filtering...'
-filter = numpy.bool_(1-numpy.isnan(coordMat).any(axis=1))
-print 'Writing parameter files...'
-#numpy.save('%s_names.npy'%basename, ligNames[filter])
-#numpy.save('%s_charges.npy'%basename, ligCharges[filter])
-#numpy.save('%s_atomIds.npy'%basename, ligAtomIds[filter])
-numpy.save('%s_coordMat.npy'%basename, coordMat[filter])
-#numpy.save('%s_resTypes.npy'%basename, resTypes[filter])
-#numpy.save('%s_resIds.npy'%basename, resIds[filter])
-#numpy.save('%s_atomName.npy'%basename, atomName[filter])
-#numpy.save('%s_atomType.npy'%basename, atomType[filter])
-numpy.savez('%s_parameters.npz'%basename, names=ligNames[filter], charges=ligCharges[filter], atomIds=ligAtomIds[filter], resTypes=resTypes[filter], resIds=resIds[filter], atomNames=atomName[filter], atomTypes=atomType[filter])
+#update to the print function
+print ('Array conversion...')
+ligNames = np.array(ligNames)
+ligCharges = np.array(ligCharges, dtype=float)
+ligAtomIds = np.array(ligAtomIds, dtype=int)
+resTypes = np.array(resTypes)
+atomName = np.array(atomName)
+resIds = np.array(resIds, dtype=int)
+coordMat = np.array(coordMat, dtype=float)
+atomType = np.array(atomType)
+#update to the print function
+print ('Array filtering...')
+filter = np.bool_(1-np.isnan(coordMat).any(axis=1))
+#update to the print function
+print ('Writing parameter files...')
+#np.save('%s_names.npy'%basename, ligNames[filter])
+#np.save('%s_charges.npy'%basename, ligCharges[filter])
+#np.save('%s_atomIds.npy'%basename, ligAtomIds[filter])
+np.save('%s_coordMat.npy'%basename, coordMat[filter])
+#np.save('%s_resTypes.npy'%basename, resTypes[filter])
+#np.save('%s_resIds.npy'%basename, resIds[filter])
+#np.save('%s_atomName.npy'%basename, atomName[filter])
+#np.save('%s_atomType.npy'%basename, atomType[filter])
+np.savez('%s_parameters.npz'%basename, names=ligNames[filter], charges=ligCharges[filter], atomIds=ligAtomIds[filter], resTypes=resTypes[filter], resIds=resIds[filter], atomNames=atomName[filter], atomTypes=atomType[filter])
