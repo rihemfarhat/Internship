@@ -6,6 +6,7 @@ from pylab import *
 import math
 import pdbReader
 import matriceManipulation
+import matplotlib.pyplot as plt 
 
 class Correlation():
  def __init__(self, covarMatrixFileName=None):
@@ -140,12 +141,12 @@ class Correlation():
   return numpy.array(cm)
 
  def plot(self, matrix, outfileName='correlation.pdf',normalize=False):
-  figure()
+  plt.figure()
   if normalize:
    matrix = numpy.log(abs(matrix/matrix.max()))
-  imshow(matrix, interpolation='nearest')
-  colorbar()
-  savefig(outfileName)
+  plt.imshow(matrix, interpolation='nearest')
+  plt.colorbar()
+  plt.savefig(outfileName)
 
  def write3Dcorr(self, matrix, pdbFileName, outFileName='corrCoords.txt', threshold = 0.0, anticorr = True):
   mm = matriceManipulation.matrix(matrix)
